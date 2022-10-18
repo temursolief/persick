@@ -15,7 +15,7 @@
             {% for c in categories %}
                 <li {% if category_slug == c.slug %}class="selected"
                     {% endif %}>
-                    <a href="{{ 'c.get_absolute_url' }}">{{ c.name }}</a>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -24,7 +24,7 @@
         <h1>{% if category %}{{ category.name }}{% else %} Products {% endif %}</h1>
         {% for product in products %}
             <div class="item">
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}>
+                <a href="{{ product.get_absolute_url }}">
                 <br>
                 <img src="{% if product.image %}{{ product.image.url }}{% else %}
                 {% static 'img/no_image.png' %}{% endif %}">
