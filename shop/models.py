@@ -1,8 +1,13 @@
 from django.db import models
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=256)
     slug = models.SlugField(max_length=256, unique=True)
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category', 
+                args=[self.slug])
 
     class Meta:
         ordering = ['name']
@@ -30,6 +35,10 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('shop:product_detail', 
+                args=[self.id, self.slug])
 
     class Meta:
         ordering = ['name']
